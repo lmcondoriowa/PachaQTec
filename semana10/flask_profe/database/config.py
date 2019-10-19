@@ -1,5 +1,5 @@
 import os
-from orator import DatabaseManager
+from orator import DatabaseManager, Model
 from dotenv import load_dotenv
 from pathlib import Path
 
@@ -35,3 +35,8 @@ class Conexion:
             return db
         except Exception as e:
             print(f'Error : {str(e)}')
+
+    def model(self):
+        conn = self.initialize()
+        Model.set_connection_resolver(conn)
+        return Model
